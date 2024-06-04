@@ -24,13 +24,15 @@ import { PanelDto } from './dto/panel.dto';
 @Injectable()
 export class PanelService {
 
-  // Leer el readme para mayor comprension
   calcularMaximo(dto: PanelDto): number {
 
     // Destructuracion de objeto
     const {largoPanelB,anchoPanelA,largoTechoY,anchoTechoX} = dto;
 
     // Paneles 
+    // 3/1 * 5/2
+    // 3 * 2.5
+    // = 7 
     const paneles = Math.floor(anchoTechoX/anchoPanelA) * Math.floor(largoTechoY/largoPanelB)
 
     const restoX = anchoTechoX % anchoPanelA
@@ -44,8 +46,10 @@ export class PanelService {
     const restoYRotacion = largoTechoY % anchoPanelA;
     const panelesTotalRotacion = Math.floor(restoXRotacion / anchoPanelA) * Math.floor(largoTechoY / largoPanelB) + Math.floor(anchoTechoX / largoPanelB) * Math.floor(restoYRotacion / anchoPanelA);
     
-    console.log( Math.max(paneles + panelesTotales, panelesRotacion + panelesTotalRotacion))
-    return Math.max(paneles + panelesTotales, panelesRotacion + panelesTotalRotacion);
+    const panelesMax = paneles + panelesTotales
+    const panelesMaxRotados = panelesRotacion + panelesTotalRotacion
+
+    return Math.max(panelesMax, panelesMaxRotados);
   }
 
 }
