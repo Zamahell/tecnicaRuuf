@@ -26,13 +26,13 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Instalación de dependencias
 
 ```bash
 $ yarn install
 ```
 
-## Running the app
+## Levantar la aplicación
 
 ```bash
 # development
@@ -45,29 +45,18 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-## Test
+Prueba técnica Ruuf Solar para el puesto de desarrollador jr.
 
-```bash
-# unit tests
-$ yarn run test
+El objetivo de esta prueba técnica es demostrar a través de código la solución para el ejercicio de "¿Cuántos paneles caben?".
 
-# e2e tests
-$ yarn run test:e2e
+Para esta solución, he utilizado NestJS, un framework modular de Node.js, en el cual:
 
-# test coverage
-$ yarn run test:cov
-```
+1. Primero hago unas configuraciones en el main para que tome el ValidationPipe, el cual nos servirá para las validaciones del DTO (Data Transfer Object).
 
-## Support
+2. Configuro el DTO con el fin de que, al momento de usarlos en Postman para generar una petición, sea validado con las siguientes notaciones: @IsNotEmpty (no puede estar vacío), @IsNumber (tiene que ser un número) y @Min para que tenga un valor mínimo.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+3. Configuro el controller donde se hará la petición, aquí un método POST para hacer la solicitud.
 
-## Stay in touch
+4. El service, donde ocurre la lógica de lo que estoy realizando, primero calculo la cantidad de paneles que caben en las medidas del techo (las medidas que se ingresan a través de Postman), y veo la cantidad que caben, también considerando el resto o el espacio restante que queda. Hago una rotación del panel para ver si caben más.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+5. Al final, sumo las cantidades de paneles (con resto si es que hay) y la cantidad de paneles rotados. En el return comparo, usando el método max, cuál tiene mayor cantidad de paneles (comparando la suma de los paneles y la suma de los paneles rotados). Esto con el fin de retornar el valor máximo al controller, y que desde acá se muestre cuál tiene una mayor cantidad de paneles en el techo, con rotación o sin esta (recordando que consideramos el resto).
